@@ -14,34 +14,21 @@ function Column(id, name) {
 				var cardName = prompt("Enter the name of the card");
 				event.preventDefault();
 			
+				var data = new FormData();
+				data.append('name', cardName);
+				data.append('bootcamp_kanban_column_id', self.id);
+
 				fetch(baseUrl + '/card', {
 						method: 'POST',
-						body: {
-							//body query
-						}
+						headers: myHeaders,
+						body: data,
 					})
 					.then(function(res) {
 						return res.json();
 					})
-					.then(function() {
-						//create a new client side card
-
-						var data = new FormData();
-						data.append('name', cardName);
-						data.append('bootcamp_kanban_column_id', self.id);
-
-						fetch(baseUrl + '/card', {
-								method: 'POST',
-								headers: myHeaders,
-								body: data,
-							})
-							.then(function(res) {
-								return res.json();
-							})
-							.then(function(resp) {
-								var card = new Card(resp.id, cardName);
-								self.addCard(card);
-							});
+					.then(function(resp) {
+						var card = new Card(resp.id, cardName);
+						self.addCard(card);
 					});
 			
 				self.addCard(new Card(cardName));

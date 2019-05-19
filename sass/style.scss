@@ -52,10 +52,11 @@ body {margin: 0;}
   overflow: hidden;
   position: relative;
 }
-.card-list {
+.column-card-list {
   list-style: none;
   margin: 5px;
   padding: 0px;
+  min-height: 50px;
 }
 .card-description {
   margin: 2px 0;
